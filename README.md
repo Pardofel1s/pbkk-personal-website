@@ -1,58 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Pardofelis — Kamal's personal website
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Personal website untuk tugas pertama PBKK, menggunakan Laravel 13, Blade, Bootstrap 5 melalui CDN, dan CSS/JavaScript khusus berdasarkan **Warm Editorial Aura**.
 
-## About Laravel
+## Dua versi untuk belajar
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+| Versi | Git | Folder lokal pada workspace ini |
+| --- | --- | --- |
+| Home sederhana buatan Kamal | `main`, tag `checkpoint-home`, commit `3576eae` | `../personal-website` |
+| Website lengkap | `feature/personal-website-complete` | `../personal-website-complete` |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Kedua folder adalah Git worktree dari repositori yang sama. Branch versi lengkap tidak digabungkan ke `main`. Jangan memakai `git switch` ke branch yang sedang dipakai worktree lain; buka folder yang sesuai.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Menjalankan versi lengkap setelah clone baru
 
-## Learning Laravel
+Persyaratan: PHP 8.3+ (diverifikasi dengan PHP 8.4.14), Composer, ekstensi Laravel dan PDO SQLite. Git, PHP, Composer sudah tersedia di komputer yang digunakan saat implementasi.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+PowerShell:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```powershell
+git clone --branch feature/personal-website-complete https://github.com/Pardofel1s/pbkk-personal-website.git
+cd pbkk-personal-website
+composer install
+Copy-Item .env.example .env
+composer run-script post-create-project-cmd
+php artisan serve --port=8001
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Buka http://127.0.0.1:8001. Untuk worktree lokal yang telah disiapkan, cukup jalankan `php artisan serve --port=8001` jika servernya belum hidup. Jika port terpakai, gunakan port lain yang kosong.
 
-## Contributing
+Tidak perlu `npm install` atau build Vite untuk halaman portofolio ini. Bootstrap dimuat dari CDN sesuai tugas, font dari Google Fonts, serta CSS/JS langsung dari `public`. Koneksi internet diperlukan untuk Bootstrap dan font tersebut; font sistem tersedia sebagai fallback. Dependensi Vite bawaan dipertahankan agar dapat dipelajari kemudian.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Untuk demo gunakan `php artisan serve`, bukan `composer run dev` bawaan yang ikut menjalankan worker dan Laravel Pail.
 
-## Code of Conduct
+## Isi website
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Home: nama lengkap, NRP, kartu envelope yang bisa dibuka, demo kartu, slider blur, dan pilihan warna.
+- About: profil Departemen Teknik Informatika ITS beserta tautan sumber resmi.
+- Projects: tiga item yang benar-benar ada di versi ini: personal website, CSS playground, dan kalkulator.
+- Project Idea: usulan **Database Health Checker & Performance Monitor**. Masih bahan diskusi, bukan keputusan kelompok atau implementasi AI.
+- Contact: email, WhatsApp, GitHub, LinkedIn yang diberikan pemilik.
+- Collection: enam referensi visual dan belajar, dengan filter kategori.
+- Blog: tiga catatan implementasi lengkap, halaman detail, pencarian dan filter, serta keadaan tanpa hasil.
+- Kalkulator: tambah, kurang, kali, bagi, angka negatif/desimal, validasi angka dan operasi, serta penanganan pembagian nol.
+- Halaman 404, navigasi aktif, menu mobile, fokus keyboard, dan reduced motion.
 
-## Security Vulnerabilities
+## Pemetaan ketentuan dosen
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Ketentuan | Implementasi |
+| --- | --- |
+| GET / | PageController::index → home.blade.php |
+| Nama lengkap + NRP | Kamal Zaky Adinata — 5025241153 |
+| GET /about | PageController::about → about.blade.php |
+| GET /project-idea | PageController::project → project.blade.php |
+| Tidak ada closure untuk merender halaman | Seluruh route aplikasi dalam routes/web.php diarahkan ke PageController |
+| GET /hitung/{angka1}/{angka2}/{operasi} | PageController::hitung menghitung di PHP |
+| Empat operasi | tambah, kurang, kali, bagi |
+| Bootstrap 5/Tailwind via CDN | Bootstrap 5.3.8 CSS melalui jsDelivr |
+| Navbar responsif | Home, About, Projects, Collection, Blog, Kalkulator, Contact |
+| GitHub, tanpa vendor dan .env | .gitignore bawaan; SQLite lokal juga diabaikan |
 
-## License
+Form GET di /kalkulator mengirim input ke /kalkulator/submit, yang memvalidasi bentuk input lalu mengarahkan ke URL hitung yang diwajibkan. Hasil perhitungan tidak memakai eval atau perhitungan JavaScript. Input dibatasi ±1 triliun dan panjang 32 karakter; hasil ditampilkan hingga 12 digit signifikan. Input tak valid menghasilkan halaman error yang tetap dapat diedit dengan status HTTP 422.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Urutan membaca kode
+
+1. `routes/web.php`: peta URL dan controller tujuan.
+2. `app/Http/Controllers/PageController.php`: method per halaman dan logika kalkulator.
+3. `config/portfolio.php`: identitas, kontak, daftar project, koleksi, artikel.
+4. `resources/views/layouts/app.blade.php`: kerangka bersama, font, CSS, navbar, footer.
+5. `resources/views/home.blade.php`: konten Home menggunakan @extends dan @section.
+6. `public/css/portfolio.css`: token warna, layout, komponen, dan breakpoint.
+7. `public/js/portfolio.js`: perilaku interaktif tanpa mengubah perhitungan PHP.
+
+Data statik tidak memerlukan model Eloquent tambahan. Model/migrasi bawaan Laravel tetap tersedia untuk latihan berikutnya.
+
+## Menyesuaikan konten
+
+Edit `config/portfolio.php` untuk kontak, proyek, koleksi, dan artikel. Ini konten publik website; jangan menaruh password atau API key di sana.
+
+Edit `resources/views/project.blade.php` setelah kelompok menentukan ide final. Isi koleksi adalah referensi yang digunakan dalam website, bukan daftar hobi yang diasumsikan. Artikel adalah catatan implementasi awal yang boleh diedit oleh pemilik sebelum pengumpulan.
+
+Pada preview project, visual dibuat sebagai komponen CSS yang merepresentasikan fitur website. Ganti dengan screenshot asli jika ingin memamerkan project lain.
+
+## Verifikasi
+
+```powershell
+php artisan test --compact
+php vendor/bin/pint --test
+php artisan route:list --except-vendor
+php artisan view:cache
+node --check public/js/portfolio.js
+```
+
+Hasil implementasi: **29 tests passed, 86 assertions**. Rincian pemeriksaan browser ada di `docs/VALIDATION.md`.
+
+## Pengumpulan dan demo
+
+- Tautan branch yang berisi tugas lengkap: https://github.com/Pardofel1s/pbkk-personal-website/tree/feature/personal-website-complete
+- Repositori dibuat private; berikan akses ke dosen atau sesuaikan visibilitas sesuai mekanisme pengumpulan kampus.
+- Ambil screenshot Home yang menampilkan nama dan NRP.
+- Menurut materi tugas: tautan GitHub + screenshot melalui LMS paling lambat H-1 pukul 23.59 WIB sebelum pertemuan 2.
+- Kelompok menyiapkan minimal 5 slide dan siap demo individual maksimal 5 menit.
+- Panduan Git dan kerangka demo: `docs/LEARNING.md`.
+
+## Sumber
+
+- Desain dan alur milik pengguna: `docs/design/DESIGN.md` dan `docs/design/WebFlow.md`.
+- Profil jurusan: https://www.its.ac.id/informatika/
+- Laravel: https://laravel.com/docs
+- Bootstrap CDN: https://getbootstrap.com/docs/5.3/getting-started/introduction/
+- Font: Playfair Display dan Manrope melalui Google Fonts.
