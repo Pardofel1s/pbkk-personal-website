@@ -39,3 +39,12 @@ These are targeted functional and responsive checks, not an exhaustive browser c
 - Blog entries are initial implementation notes for review/editing by the owner.
 - Project Idea is explicitly marked as a proposal pending group agreement; this site does not run an AI agent.
 - The source repository is private. External visitors cannot read the source without access.
+
+## Animation upgrade — 2026-09-06
+
+- Added progressive scroll reveals, floating hero artwork, rotating accents, card tilt, button ripple and sheen, reading progress, menu entrance, filter-result reveals, and supported-browser view transitions.
+- Footer animation toggle persists across reloads; device reduced-motion preference takes priority. Content remains visible without JavaScript.
+- Verified in the local browser: active hero animation, toggle stops it, disabled preference survives reload, re-enabling works, Typography filter shows 2 items, and mobile menu exposes 7 links at 390 x 844 without horizontal page overflow.
+- Browser error log was empty during these checks.
+- Laravel: 29 tests passed (86 assertions). JavaScript syntax checks, Blade compilation, and git diff whitespace checks passed.
+- OS reduced-motion switching and cross-browser view transitions were not manually tested.

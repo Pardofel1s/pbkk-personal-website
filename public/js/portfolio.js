@@ -62,6 +62,7 @@ document.querySelectorAll('[data-filter-group]').forEach((group) => {
         });
         if (count) count.textContent = visible + (name === 'blog' ? ' catatan' : ' items');
         if (empty) empty.hidden = visible !== 0;
+        document.dispatchEvent(new CustomEvent('portfolio:filtered', { detail: { group: name } }));
     };
     group.querySelectorAll('[data-filter]').forEach((button) => {
         button.addEventListener('click', () => {

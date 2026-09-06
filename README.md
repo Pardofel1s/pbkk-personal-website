@@ -109,3 +109,7 @@ Hasil implementasi: **29 tests passed, 86 assertions**. Rincian pemeriksaan brow
 - Laravel: https://laravel.com/docs
 - Bootstrap CDN: https://getbootstrap.com/docs/5.3/getting-started/introduction/
 - Font: Playfair Display dan Manrope melalui Google Fonts.
+
+## Animasi UI
+
+`public/css/motion.css` mengatur gerakan visual dan `public/js/motion.js` mengatur scroll reveal, tilt, ripple, serta progress membaca. Tombol **Animations: on/off** di footer menyimpan preferensi. Pengaturan reduced motion perangkat selalu diutamakan. Transisi antarhalaman aktif pada browser yang mendukung View Transitions.
